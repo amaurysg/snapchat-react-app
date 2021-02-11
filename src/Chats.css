@@ -50,3 +50,7 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.chats__chatIcon {
+  color: white;
+}
