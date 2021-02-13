@@ -5,13 +5,18 @@ import ChatBubbleIcon from '@material-ui/icons/ChatBubble'
 import './Chats.css'
 import { auth, db } from './firebase'
 import Chat from './Chat'
-import { useSelector } from 'react-redux'
-import { selectUser } from './features/appSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { resetImage, selectUser } from './features/appSlice'
+import RadioButtonUnCheckedIcon from '@material-ui/icons/RadioButtonUnchecked'
+import { useHistory } from 'react-router-dom'
+import resetCameraImage from './features/cameraSlice'
 
 const Chats = () => {
 
   const [posts, setPosts] = useState([])
   const user = useSelector(selectUser)
+  const dispatch = useDispatch()
+  const history = useHistory()
 
   useEffect(() => {
    db.collection('posts')
@@ -25,6 +30,11 @@ const Chats = () => {
     )
   }, [])
 
+  const takePic = () =>{
+    /* dispatch(resetCameraImage()) */
+    history.push("/")
+  }
+
   console.log("posts",posts)
 
   return (
@@ -32,7 +42,7 @@ const Chats = () => {
       <div className="chats__header">
         <Avatar src={user.profilePic} onClick={()=> auth.signOut()} className="chats__avatar"/>
         <div className="chats__search">
-          <SearchIcon/>
+          <SearchIcon className="chats__searchIcon"/>
           <input 
             type="text"
             placeholder="Friends"
@@ -60,6 +70,13 @@ const Chats = () => {
 
             }
         </div>
+
+          <RadioButtonUnCheckedIcon
+              className="chats__takePicIcon"
+              onClick={takePic}
+              fontSize="large"
+          />      
+
     </div>
   )
 }

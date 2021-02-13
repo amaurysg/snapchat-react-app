@@ -42,7 +42,14 @@ function App() {
         )
         :
         (
-        <div class="app__body">
+          <>
+          <img
+          className="app__logo"
+          src="http://assets.stickpng.com/images/5a4e30612da5ad73df7efe71.png" alt=""/>
+         
+        <div className="app__body">
+          <div className="app__bodyBackground">
+
               <Switch>
                 <Route exact path="/chats/view">
                     <ChatView/>
@@ -58,7 +65,9 @@ function App() {
                 </Route>
 
               </Switch>
+          </div>
         </div>
+         </>
         )
        }  
     </Router>
